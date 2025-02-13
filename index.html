@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario y DOM</title>
+</head>
+<body>
+    <form id="myForm">
+        <label for="producto">Producto:</label>
+        <input type="text" id="producto" name="producto" required>
+        <br>
+        <label for="valor">Valor:</label>
+        <input type="number" id="valor" name="valor" required>
+        <br>
+        <label for="cantidad">Cantidad:</label>
+        <input type="number" id="cantidad" name="cantidad" required>
+        <br>
+        <button type="submit">Enviar</button>
+    </form>
+
+    <h2>Datos del formulario:</h2>
+    <ul id="formData"></ul>
+
+    <script>
+        let SubTotal = 0;
+        let Total = 0;
+        document.getElementById('myForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Evita el envío del formulario
+
+            // Obtiene los valores de los campos del formulario
+            const name = document.getElementById('producto').value;
+            const valor = document.getElementById('valor').value;
+            const cantidad = document.getElementById('cantidad').value;
+
+            SubTotal = valor * cantidad;
+            Total += SubTotal;
+
+            
+
+            // Crea el texto a mostrar
+            const li = document.createElement('li');
+            li.textContent = `Producto: ${name}, Valor: ${valor}, Cantidad: ${cantidad}, SubTotal: ${SubTotal}, Total: ${Total}`;
+            
+
+            // Convertir en Arreglo
+            document.getElementById('formData').appendChild(li);
+
+            // Agrega el texto al elemento HTML
+            document.getElementById('producto').value = '';
+            document.getElementById('valor').value = ''
+            document.getElementById('cantidad').value = ''
+        });
+
+       
+
+    </script>
+</body>
+</html>
