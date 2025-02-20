@@ -16,31 +16,35 @@
         <label for="cantidad">Cantidad:</label>
         <input type="number" id="cantidad" name="cantidad" required>
         <br>
-        <button type="submit">Enviar</button>
+        <button type="submit">Agregar</button>
     </form>
 
     <h2>Datos del formulario:</h2>
     <ul id="formData"></ul>
+    <h3>Total: <span id="total">0</span></h3>
 
     <script>
-        let SubTotal = 0;
-        let Total = 0;
+        let Total = 0; // Inicializamos la variable Total
+
         document.getElementById('myForm').addEventListener('submit', function(event) {
             event.preventDefault(); // Evita el envío del formulario
 
-            // Obtiene los valores de los campos del formulario
+            // Obtiene los valores de los campos del formulario y los convierte a los tipos correctos
             const name = document.getElementById('producto').value;
-            const valor = document.getElementById('valor').value;
-            const cantidad = document.getElementById('cantidad').value;
+            const valor = parseFloat(document.getElementById('valor').value);
+            const cantidad = parseInt(document.getElementById('cantidad').value);
 
-            SubTotal = valor * cantidad;
-            Total += SubTotal;
+            if (isNaN(valor) || isNaN(cantidad) || cantidad <= 0 || valor <= 0) {
+                alert("Ingrese valores válidos.");
+                return;
+            }
 
-            
+            let subTotal = valor * cantidad;
+            Total += subTotal;
 
-            // Crea el texto a mostrar
+            // Crea el elemento de la lista
             const li = document.createElement('li');
-            li.textContent = `Producto: ${name}, Valor: ${valor}, Cantidad: ${cantidad}, SubTotal: ${SubTotal}, Total: ${Total}`;
+            li.textContent = `Producto: ${name}, Valor: ${valor}, Cantidad: ${cantidad}, SubTotal: ${subTotal}`;
 
             // Crea el botón de eliminar
             const deleteButton = document.createElement('button');
@@ -57,19 +61,15 @@
 
             li.appendChild(deleteButton);
 
-            // Convertir en Arreglo
+            // Agrega el elemento a la lista
             document.getElementById('formData').appendChild(li);
             document.getElementById('total').textContent = Total;
 
-
-            // Agrega el texto al elemento HTML
+            // Limpia los campos del formulario
             document.getElementById('producto').value = '';
-            document.getElementById('valor').value = ''
-            document.getElementById('cantidad').value = ''
+            document.getElementById('valor').value = '';
+            document.getElementById('cantidad').value = '';
         });
-
-       
-
     </script>
 </body>
 </html>
