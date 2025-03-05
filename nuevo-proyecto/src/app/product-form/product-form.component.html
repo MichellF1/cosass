@@ -1,0 +1,30 @@
+<div class="container">
+    <h2>Agregar Producto</h2>
+    <form (ngSubmit)="addProduct()">
+      <label>Producto:</label>
+      <input type="text" placeholder="Producto" [(ngModel)]="newProduct.name" name="name" required />
+      
+      <label>Valor:</label>
+      <input type="number" placeholder="Valor" [(ngModel)]="newProduct.price" name="price" required min="0" />
+      
+      <label>Cantidad:</label>
+      <input type="number" placeholder="Cantidad" [(ngModel)]="newProduct.quantity" name="quantity" required min="1" />
+      
+      <button type="submit">Agregar</button>
+    </form>
+  
+    <h3>Datos del formulario:</h3>
+    <ul>
+      <li *ngFor="let product of products; let i = index">
+        <strong>Producto:</strong> {{ product.name }}, 
+        <strong>Valor:</strong> {{ product.price }}, 
+        <strong>Cantidad:</strong> {{ product.quantity }}, 
+        <strong>SubTotal:</strong> {{ product.quantity * product.price }}
+        
+        <button (click)="removeProduct(i)">Eliminar</button>
+      </li>
+    </ul>
+  
+    <h3><strong>Total: {{ getTotal() }}</strong></h3>
+  </div>
+  
