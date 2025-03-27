@@ -1,0 +1,15 @@
+<form>
+  <input [(ngModel)]="valor1" type="number" placeholder="valor1" name="valor1">
+  <input [(ngModel)]="valor2" type="number" placeholder="valor2" name="valor2">
+
+  <button type="button" (click)="datos()">Enviar</button>
+
+</form>
+
+<ul *ngFor="let i of arreglo " >
+  <li>{{ i }}</li>
+</ul>
+
+<div>{{ error }}</div>
+
+<router-outlet />
